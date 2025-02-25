@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Django-WeatherAPI</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url('https://giffiles.alphacoders.com/948/94825.gif');
+        background-size: cover;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        color: white;
+      }
+
+      .container {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.6); /* Adds semi-transparent black background */
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      h1 {
+        color: white;
+        margin: 0 0 20px;
+      }
+
+      form input[type="text"] {
+        padding: 10px;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 5px;
+        border: none;
+      }
+
+      h4 {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Weather Report</h1>
+      <form method="post">
+        {% csrf_token %}
+        <input class="textarea" type="text" name="location" placeholder="Please Enter the location"><button onclick="speech()"><img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alamy.com%2Frecord-microphone-mic-vector-icon-e-commerce-sign-graph-symbol-for-your-web-site-design-logo-app-ui-image402550351.html&psig=AOvVaw1FNYh5JUaydVWOV9otBeOD&ust=1730473799315000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMCs5bLzuIkDFQAAAAAdAAAAABAE" alt=""></button>
+      </form>
+
+      <div>
+        {% if country_code %}
+        <h1>{{ location }}</h1>
+        <div>
+          <h4>Country code: {{ country_code }}</h4>
+          <h4>Longitude: {{ longitude }}</h4>
+          <h4>Latitude: {{ latitude }}</h4>
+          <h4>Temperature: {{ temperature }}</h4>
+          <h4>Humidity: {{ humidity }}</h4>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  <script>
+    function speech(){
+        var recognition = new window.webkitSpeechRecognition();
+        recognition.language = "en-GB";
+        recognition.onresult = function(event){
+            console.log(event);
+
+        }
+        recognition.start();
+    }
+
+  </script>
+  </body>
+</html>
